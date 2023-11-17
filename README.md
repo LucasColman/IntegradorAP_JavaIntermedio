@@ -1,9 +1,12 @@
-# IntegradorAP_JavaIntermedio
-##**Trabajo Práctico Integrador**
-###**Colman Hernan Lucas**
-* * *
-###**Sistema de Reporte de Incidentes**
-####Contexto general
+# Trabajo Práctico Integrador
+
+## Sistema de Reporte de Incidentes
+
+### Colman Hernan Lucas
+
+
+#### Contexto general
+
 Una importante empresa de soporte operativo solicita el diseño y desarrollo de un sistema que le 
 permita la generación y seguimiento de los incidentes que se presentan.
 La empresa en cuestión se dedica a brindar soporte operativo sobre distintas aplicaciones (SAP, Tango, 
@@ -17,6 +20,11 @@ y modificaciones de los datos de cada uno de ellos.
 Finalmente, la mesa de ayuda es responsable de atender las llamadas e ingresar al sistema los 
 incidentes reportados.
 * * *
-##Aclaraciones
+#### Lenguajes y herramientas utilizadas
+- Java 19
+- NetBeans
+- Microsoft Visio
+- MySQL
+#### Aclaraciones
 - En la carpeta Docs, se encuentran los respectivos diagramas.
-- En la rama MASTER se encuentra el proyecto en NetBeans.
+- En la rama MASTER se encuentra el proyecto.
