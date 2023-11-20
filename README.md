@@ -27,4 +27,3 @@ incidentes reportados.
 - MySQL
 #### Aclaraciones
 - En la carpeta Docs, se encuentran los respectivos diagramas.
-- En la rama MASTER se encuentra el proyecto.
