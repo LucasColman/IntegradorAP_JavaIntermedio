@@ -3,6 +3,7 @@ package com.mycompany.reportedeincidentes.modelo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,8 +29,8 @@ public class Reporte implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReporte;
     
-    @Temporal(TemporalType.DATE)
-    private LocalDate fecha;
+    
+    private LocalDateTime fecha;
     
     @ManyToOne @JoinColumn(name = "incidencia")
     private Incidencia incidencia;

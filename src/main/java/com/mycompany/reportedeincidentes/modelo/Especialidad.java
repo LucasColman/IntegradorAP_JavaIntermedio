@@ -3,7 +3,6 @@ package com.mycompany.reportedeincidentes.modelo;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +21,6 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-@AllArgsConstructor
 public class Especialidad implements Serializable {
 
     @Id
@@ -37,6 +35,14 @@ public class Especialidad implements Serializable {
 
     @ManyToMany
     private Set<Tecnico> tecnicos = new HashSet<>();
+    
+    
+    //Metodos
+
+    public Especialidad(Long idEspecialidad, String nombreEspecialidad) {
+        this.idEspecialidad = idEspecialidad;
+        this.nombreEspecialidad = nombreEspecialidad;
+    }
 
     public void agregarTecnico(Tecnico tecnico) {
         this.tecnicos.add(tecnico);

@@ -2,6 +2,7 @@
 <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence           http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
   <persistence-unit name="incidenciaPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.mycompany.reportedeincidentes.modelo.Cliente</class>
     <class>com.mycompany.reportedeincidentes.modelo.Especialidad</class>
     <class>com.mycompany.reportedeincidentes.modelo.Incidencia</class>
     <class>com.mycompany.reportedeincidentes.modelo.Reporte</class>
@@ -14,6 +15,7 @@
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="my_SQL321"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
     </properties>
   </persistence-unit>
 </persistence>

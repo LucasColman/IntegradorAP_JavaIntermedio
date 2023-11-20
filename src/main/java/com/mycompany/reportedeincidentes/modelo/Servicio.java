@@ -24,7 +24,6 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-@AllArgsConstructor
 public class Servicio implements Serializable {
 
     @Id
@@ -41,6 +40,12 @@ public class Servicio implements Serializable {
 
     @OneToMany(mappedBy = "servicio")
     private Set<TipoIncidencia> tiposIncidencias = new HashSet<>();
+
+    public Servicio(Long idServicio, String nombreServicio) {
+        this.idServicio = idServicio;
+        this.nombreServicio = nombreServicio;
+    }
+    
 
     public void agregarCliente(Cliente cliente) {
         this.clientes.add(cliente);

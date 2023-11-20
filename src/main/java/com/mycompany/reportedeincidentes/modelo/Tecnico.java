@@ -1,5 +1,6 @@
 package com.mycompany.reportedeincidentes.modelo;
 
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +20,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-@AllArgsConstructor
+
 public class Tecnico implements Serializable {
 
     @Id
@@ -35,6 +35,17 @@ public class Tecnico implements Serializable {
 
     @OneToMany(mappedBy = "tecnico")
     private Set<Incidencia> incidencias = new HashSet<>();
+    
+    //Metodos
+  
+    public Tecnico(Long idTecnico, String dni, String nombre, String apellido) {
+        this.idTecnico = idTecnico;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+    
+    
 
     public void agregarEspecialidad(Especialidad especialidad) {
         this.especialidades.add(especialidad);
@@ -51,5 +62,11 @@ public class Tecnico implements Serializable {
     public void quitarIncidencia(Incidencia incidencia) {
         this.incidencias.remove(incidencia);
     }
+    
+    public void resolverIncidencia(Incidencia incidencia){ 
+       incidencia.setEstado(false);
+        
+    }
+    
 
 }

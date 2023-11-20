@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +22,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-@AllArgsConstructor
+
 public class Cliente implements Serializable {
 
     @Id
@@ -39,6 +38,14 @@ public class Cliente implements Serializable {
     private Set<Servicio> servicios = new HashSet<>();
     @OneToMany(mappedBy = "cliente")
     private Set<Incidencia> incidencias = new HashSet<>();
+
+    public Cliente(Long idCliente, String apellido, String nombre, String razonSocial, String cuil) {
+        this.idCliente = idCliente;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.razonSocial = razonSocial;
+        this.cuil = cuil;
+    }
 
     public void agregarServicios(Servicio servicio) {
         this.servicios.add(servicio);

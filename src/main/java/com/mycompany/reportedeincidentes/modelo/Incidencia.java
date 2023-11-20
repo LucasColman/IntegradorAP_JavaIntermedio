@@ -2,6 +2,7 @@ package com.mycompany.reportedeincidentes.modelo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-@AllArgsConstructor
+
 public class Incidencia implements Serializable {
 
     @Id
@@ -35,10 +36,8 @@ public class Incidencia implements Serializable {
     private String descripcion;
     private boolean estado;
 
-    @Temporal(value = TemporalType.DATE)
+   
     private LocalDate fechaApertura;
-
-    @Temporal(value = TemporalType.DATE)
     private LocalDate fechaResolucion;
 
     @ManyToOne
@@ -60,6 +59,21 @@ public class Incidencia implements Serializable {
 
     @OneToMany(mappedBy = "incidencia")
     private Set<Especialidad> especialidades = new HashSet<>();
+
+    public Incidencia(Long idIncidencia, String descripcion, boolean estado, LocalDate fechaApertura, LocalDate fechaResolucion, Tecnico tecnico, Cliente cliente) {
+        this.idIncidencia = idIncidencia;
+        this.descripcion = descripcion;
+        this.estado = estado;
+        this.fechaApertura = fechaApertura;
+        this.fechaResolucion = fechaResolucion;
+        this.tecnico = tecnico;
+        this.cliente = cliente;
+    }
+    
+    
+    
+    
+    
 
     public void agregarServicio(Servicio servicio) {
         this.servicios.add(servicio);
@@ -92,5 +106,8 @@ public class Incidencia implements Serializable {
     public void quitarEspecialidad(Especialidad especialidad) {
         this.especialidades.remove(especialidad);
     }
+    
+    
+  
 
 }
