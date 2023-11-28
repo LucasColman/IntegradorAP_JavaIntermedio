@@ -22,7 +22,6 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-
 public class Cliente implements Serializable {
 
     @Id
@@ -39,8 +38,7 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente")
     private Set<Incidencia> incidencias = new HashSet<>();
 
-    public Cliente(Long idCliente, String apellido, String nombre, String razonSocial, String cuil) {
-        this.idCliente = idCliente;
+    public Cliente(String apellido, String nombre, String razonSocial, String cuil) {
         this.apellido = apellido;
         this.nombre = nombre;
         this.razonSocial = razonSocial;
@@ -49,6 +47,7 @@ public class Cliente implements Serializable {
 
     public void agregarServicios(Servicio servicio) {
         this.servicios.add(servicio);
+        servicio.agregarCliente(this);
     }
 
     public void quitarServicios(Servicio servicio) {

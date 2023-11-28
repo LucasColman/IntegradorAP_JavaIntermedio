@@ -1,54 +1,26 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
 package com.mycompany.reportedeincidentes.servicios;
 
-import com.mycompany.reportedeincidentes.modelo.Cliente;
 import com.mycompany.reportedeincidentes.modelo.Especialidad;
-import com.mycompany.reportedeincidentes.repositorio.EspecialidadJpaController;
-import com.mycompany.reportedeincidentes.repositorio.exceptions.NonexistentEntityException;
-import java.util.HashSet;
-import java.util.List;
+import com.mycompany.reportedeincidentes.modelo.Tecnico;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+/**
+ *
+ * @author Lucas
+ */
+public interface ServicioEspecialidad {
 
-public class ServicioEspecialidad {
-    EspecialidadJpaController especialidadJpa  = new EspecialidadJpaController();
-    
-    
-    public void crearEspecialidad(Especialidad especialidad){
-        especialidadJpa.create(especialidad);
-        
-    }
-    public void eliminarEspecialidad(Long idEspecialidad){
-        try {
-            especialidadJpa.destroy(idEspecialidad);
-        } catch (NonexistentEntityException ex) {
-            Logger.getLogger(ServicioCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
-    public void editarEspecialidad(Especialidad especialidad){
-        try {
-            especialidadJpa.edit(especialidad);
-        } catch (Exception ex) {
-            Logger.getLogger(ServicioCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
-    public Especialidad buscarEspecialidad(Long idEspecialidad){
-        return especialidadJpa.findEspecialidad(idEspecialidad);
-        
-    }
-    
-    public Set<Especialidad> listarEspecialidades(){
-        List<Especialidad> lista = especialidadJpa.findEspecialidadEntities();
-        Set<Especialidad> listaEspecialidades = new HashSet<Especialidad> (lista);
-        return listaEspecialidades;
-    }
-    
-    
+    public void crearEspecialidad(Especialidad especialidad);
+    public void eliminarEspecialidad(Long idEspecialidad);
+    public void editarEspecialidad(Especialidad especialidad);
+    public Especialidad buscarEspecialidad(Long idEspecialidad);
+    public Set<Especialidad> listarEspecialidades();
+    public Set<Especialidad> obtenerEspecialidadesPorTecnico(Tecnico tecnico);
+     
+     
     
 }

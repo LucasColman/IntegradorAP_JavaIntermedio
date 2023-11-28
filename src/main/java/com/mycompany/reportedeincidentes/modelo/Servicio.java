@@ -3,17 +3,12 @@ package com.mycompany.reportedeincidentes.modelo;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -41,11 +36,9 @@ public class Servicio implements Serializable {
     @OneToMany(mappedBy = "servicio")
     private Set<TipoIncidencia> tiposIncidencias = new HashSet<>();
 
-    public Servicio(Long idServicio, String nombreServicio) {
-        this.idServicio = idServicio;
+    public Servicio(String nombreServicio) {
         this.nombreServicio = nombreServicio;
     }
-    
 
     public void agregarCliente(Cliente cliente) {
         this.clientes.add(cliente);

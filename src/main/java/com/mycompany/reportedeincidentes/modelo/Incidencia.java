@@ -1,7 +1,8 @@
 package com.mycompany.reportedeincidentes.modelo;
 
+import com.mycompany.reportedeincidentes.Enums.Estado;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,9 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,19 +24,15 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-
 public class Incidencia implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idIncidencia;
-
     private String descripcion;
-    private boolean estado;
-
-   
-    private LocalDate fechaApertura;
-    private LocalDate fechaResolucion;
+    private Estado estado;
+    private LocalDateTime fechaApertura;
+    private LocalDateTime fechaResolucion;
 
     @ManyToOne
     @JoinColumn(name = "tecnico")
@@ -60,8 +54,7 @@ public class Incidencia implements Serializable {
     @OneToMany(mappedBy = "incidencia")
     private Set<Especialidad> especialidades = new HashSet<>();
 
-    public Incidencia(Long idIncidencia, String descripcion, boolean estado, LocalDate fechaApertura, LocalDate fechaResolucion, Tecnico tecnico, Cliente cliente) {
-        this.idIncidencia = idIncidencia;
+    public Incidencia(String descripcion, Estado estado, LocalDateTime fechaApertura, LocalDateTime fechaResolucion, Tecnico tecnico, Cliente cliente) {
         this.descripcion = descripcion;
         this.estado = estado;
         this.fechaApertura = fechaApertura;
@@ -69,14 +62,10 @@ public class Incidencia implements Serializable {
         this.tecnico = tecnico;
         this.cliente = cliente;
     }
-    
-    
-    
-    
-    
 
     public void agregarServicio(Servicio servicio) {
         this.servicios.add(servicio);
+        servicio.agregarIncidencia(this);
     }
 
     public void quitarServicio(Servicio servicio) {
@@ -93,6 +82,7 @@ public class Incidencia implements Serializable {
 
     public void agregarTipoIncidencia(TipoIncidencia tipoIncidencia) {
         this.tiposIncidencias.add(tipoIncidencia);
+        tipoIncidencia.setIncidencia(this);
     }
 
     public void quitarTipoIncidencia(TipoIncidencia tipoIncidencia) {
@@ -101,13 +91,15 @@ public class Incidencia implements Serializable {
 
     public void agregarEspecialidad(Especialidad especialidad) {
         this.especialidades.add(especialidad);
+        especialidad.agregarIncidencia(this);
     }
 
     public void quitarEspecialidad(Especialidad especialidad) {
         this.especialidades.remove(especialidad);
+        especialidad.quitarIncidencia();
     }
-    
-    
-  
 
-}
+    
+    
+ }
+    

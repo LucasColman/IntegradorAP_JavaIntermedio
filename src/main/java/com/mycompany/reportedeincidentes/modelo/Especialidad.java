@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,12 +34,9 @@ public class Especialidad implements Serializable {
 
     @ManyToMany
     private Set<Tecnico> tecnicos = new HashSet<>();
-    
-    
-    //Metodos
 
-    public Especialidad(Long idEspecialidad, String nombreEspecialidad) {
-        this.idEspecialidad = idEspecialidad;
+    //Metodos
+    public Especialidad(String nombreEspecialidad) {
         this.nombreEspecialidad = nombreEspecialidad;
     }
 
@@ -52,6 +48,14 @@ public class Especialidad implements Serializable {
     public void quitarTecnico(Tecnico tecnico) {
         this.tecnicos.remove(tecnico);
 
+    }
+    
+    public void agregarIncidencia(Incidencia incidencia){
+        this.incidencia = incidencia;
+    }
+    
+    public void quitarIncidencia(){
+        this.incidencia = null;
     }
 
 }
