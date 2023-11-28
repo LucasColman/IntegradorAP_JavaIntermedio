@@ -13,8 +13,6 @@ import java.util.logging.Logger;
 public class ServicioClienteImpl implements ServicioCliente{
     ClienteJpaController clienteJPA = new ClienteJpaController();
     
-    
-    
     @Override
     public void crearCliente(Cliente cliente){
         clienteJPA.create(cliente);

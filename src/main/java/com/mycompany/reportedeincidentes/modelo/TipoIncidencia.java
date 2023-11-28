@@ -38,6 +38,7 @@ public class TipoIncidencia implements Serializable {
         this.tiempoEstimadoResolucion = tiempoEstimadoResolucion;
         this.tiempoMaximoResolucion = tiempoMaximoResolucion;
         this.incidencia = incidencia;
+        incidencia.getTiposIncidencias().add(this);
         this.servicio = servicio;
     }
     

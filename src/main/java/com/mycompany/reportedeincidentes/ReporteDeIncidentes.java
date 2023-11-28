@@ -85,7 +85,6 @@ public class ReporteDeIncidentes {
         Especialidad especialidad3 = new Especialidad("Windows");
         Especialidad especialidad4 = new Especialidad("Aplicaciones en la nube");
         Especialidad especialidad5 = new Especialidad("Azure");
-        
 
         //Se persiste en la base de datos
         servicioEspecialidadImpl.crearEspecialidad(especialidad1);
@@ -170,14 +169,7 @@ public class ReporteDeIncidentes {
         servicioTipoIncidenciaImpl.crearTipoIncidencia(tipoDeIncidencia5);
         servicioTipoIncidenciaImpl.crearTipoIncidencia(tipoDeIncidencia6);
 
-        //Se asocia  el tipo de incidencia a la incidencia solicitada
-        incidencia1.agregarTipoIncidencia(tipoDeIncidencia1);
-        incidencia2.agregarTipoIncidencia(tipoDeIncidencia2);
-        incidencia2.agregarTipoIncidencia(tipoDeIncidencia3);
-        incidencia2.agregarTipoIncidencia(tipoDeIncidencia4);
-        incidencia3.agregarTipoIncidencia(tipoDeIncidencia5);
-        incidencia4.agregarTipoIncidencia(tipoDeIncidencia6);
-
+     
         //Persisto en la base de datos
         servicioIncidenciaImpl.editarIncidencia(incidencia1);
         servicioIncidenciaImpl.editarIncidencia(incidencia2);
