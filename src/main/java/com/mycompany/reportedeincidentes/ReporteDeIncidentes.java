@@ -232,11 +232,11 @@ public class ReporteDeIncidentes {
         //Se imprimen la solucion a los requerimientos
         Set<Tecnico> tecnicos = servicioTecnicoImpl.listarTecnicos();
 
-        Tecnico tecnicoConMasIncidenciasResueltas = servicioTecnicoImpl.obtenerTecnicoConMasIncidenciasResueltas(5);
+        //Tecnico tecnicoConMasIncidenciasResueltas = servicioTecnicoImpl.obtenerTecnicoConMasIncidenciasResueltas(5);
         //Tecnico tecnicoConMasIncidenciasResueltasPorEspecialidad = servicioTecnicoImpl.obtenerTecnicoConMasIncidenciasResueltas(5, "Linux");
         //Tecnico tecnicoMasRapido = servicioTecnicoImpl.obtenerTecnicoMasRapidoEnResolverIncidencias();
 
-        System.out.println("El tecnico con mas incidencias resueltas en los ultimos dias ingresados es: " + tecnicoConMasIncidenciasResueltas.getApellido() + " " + tecnicoConMasIncidenciasResueltas.getNombre());
+        //System.out.println("El tecnico con mas incidencias resueltas en los ultimos dias ingresados es: " + tecnicoConMasIncidenciasResueltas.getApellido() + " " + tecnicoConMasIncidenciasResueltas.getNombre());
 
         //b. Quién fue el técnico con más incidentes resueltos de una determinada especialidad en los últimos N días
         //System.out.println("El tecnico con mas incidencias resueltas en los ultimos dias ingresados de la especialidad Linux es: " + tecnicoConMasIncidenciasResueltasPorEspecialidad.getApellido() + " " + tecnicoConMasIncidenciasResueltasPorEspecialidad.getNombre());
