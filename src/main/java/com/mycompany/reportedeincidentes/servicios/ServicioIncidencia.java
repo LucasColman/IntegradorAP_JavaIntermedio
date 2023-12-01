@@ -15,9 +15,11 @@ public interface ServicioIncidencia {
     public Incidencia buscarIncidencia(Long idIncidencia);
 
     public Set<Incidencia> listarIncidencias();
-    
-    //public int calcularIncidenciasResueltas();
+
     public long calcularIncidenciasResueltas(Tecnico tecnico, int dias);
-    public Set<Incidencia>  obtenerIncidenciasResueltasEnNDias(int dias);
+
+    public Set<Incidencia> obtenerIncidenciasResueltasEnNDias(int dias);
+    
+     public Set<Incidencia> obtenerIncidenciasResueltasPorEspecialidad(int dias, String especialidad);
 
 }

@@ -29,7 +29,7 @@ public class Reporte implements Serializable {
     private LocalDateTime fecha;
 
     @ManyToOne
-    @JoinColumn(name = "incidencia")
+   
     private Incidencia incidencia;
 
 }

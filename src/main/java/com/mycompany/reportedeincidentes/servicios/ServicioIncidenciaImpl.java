@@ -1,6 +1,7 @@
 package com.mycompany.reportedeincidentes.servicios;
 
 import com.mycompany.reportedeincidentes.Enums.Estado;
+
 import com.mycompany.reportedeincidentes.modelo.Incidencia;
 import com.mycompany.reportedeincidentes.modelo.Tecnico;
 import com.mycompany.reportedeincidentes.repositorio.IncidenciaJpaController;
@@ -57,17 +58,6 @@ public class ServicioIncidenciaImpl implements ServicioIncidencia {
         return listaIncidencias;
     }
 
-    /*
-    public int calcularIncidenciasResueltas(Tecnico tecnico) {
-        int contador = 0;
-        for (Incidencia incidencia : tecnico.getIncidencias()) {
-            if (incidencia.getEstado() == Estado.CERRADO) {
-                contador++;
-            }
-        }
-        return contador;
-    }
-     */
     @Override
     public long calcularIncidenciasResueltas(Tecnico tecnico, int dias) {
         LocalDateTime fechaLimite = LocalDateTime.now().minusDays(dias);
@@ -78,37 +68,39 @@ public class ServicioIncidenciaImpl implements ServicioIncidencia {
                 .filter(incidencia -> incidencia.getFechaResolucion().isAfter(fechaLimite))
                 .count();
     }
-    
-    
+
     @Override
-    public Set<Incidencia>  obtenerIncidenciasResueltasEnNDias(int dias){
+    public Set<Incidencia> obtenerIncidenciasResueltasEnNDias(int dias) {
+
         Set<Incidencia> incidenciasRecientes = new HashSet<>();
+        try {
             for (Incidencia incidencia : listarIncidencias()) {
                 if (incidencia.getFechaResolucion().isAfter(LocalDateTime.now().minusDays(dias))) {
                     incidenciasRecientes.add(incidencia);
-            }
-        }
-            return incidenciasRecientes;
-}
-
-}
-
-
-
-/*LocalDateTime fechaActual = LocalDateTime.now();
-        int contador = 0;
-        for (Incidencia incidencia : listarIncidencias()) {
-            if (incidencia.getEstado() == Estado.CERRADO && incidencia.getTecnico().equals(tecnico) && incidencia.getFechaResolucion() != null ) {
-                LocalDateTime fechaCierre = incidencia.getFechaResolucion();
-                
-                System.out.println("Fecha de resolución: " + fechaCierre);
-                System.out.println("Fecha actual: " + fechaActual);
-                
-                if (fechaCierre.toLocalDate().isAfter(fechaActual.toLocalDate().minusDays(dias)) && fechaCierre.toLocalDate().isBefore(fechaActual.toLocalDate().plusDays(1))) {
-                    contador++;
                 }
-
             }
+
+        } catch (Exception e) {
         }
-        return contador;
- */
+
+        return incidenciasRecientes;
+    }
+
+    @Override
+    public Set<Incidencia> obtenerIncidenciasResueltasPorEspecialidad(int dias, String especialidad) {
+        Set<Incidencia> incidenciasRecientesPorEspecialidad = new HashSet<>();
+
+        // Crear una lista de incidencias resueltas en los últimos n días que tienen la especialidad deseada
+        try {
+            for (Incidencia incidencia : listarIncidencias()) {
+                if (incidencia.getFechaResolucion().isAfter(LocalDateTime.now().minusDays(dias)) && incidencia.getEspecialidades().stream().anyMatch(e -> e.getNombreEspecialidad().equals(especialidad))) {
+                    incidenciasRecientesPorEspecialidad.add(incidencia);
+                }
+            }
+            return incidenciasRecientesPorEspecialidad;
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+}

@@ -24,7 +24,7 @@ import lombok.ToString;
 @ToString
 public class Cliente implements Serializable {
 
-    @Id
+   @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCliente;
 
@@ -35,6 +35,7 @@ public class Cliente implements Serializable {
 
     @ManyToMany
     private Set<Servicio> servicios = new HashSet<>();
+    
     @OneToMany(mappedBy = "cliente")
     private Set<Incidencia> incidencias = new HashSet<>();
 

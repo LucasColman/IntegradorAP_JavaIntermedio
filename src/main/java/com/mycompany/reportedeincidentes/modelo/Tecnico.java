@@ -61,18 +61,5 @@ public class Tecnico implements Serializable {
         this.incidencias.remove(incidencia);
     }
 
-    public Duration calcularTiempoPromedioResolucion() {
-        long tiempoTotalResolucion = 0;
-    
-        for (Incidencia incidencia : getIncidencias()) {
-            if (incidencia.getFechaApertura() != null && incidencia.getFechaResolucion() != null) {
-                tiempoTotalResolucion += Duration.between(incidencia.getFechaApertura(), incidencia.getFechaResolucion()).toMillis();
-                return Duration.ofMillis(tiempoTotalResolucion/ getIncidencias().size());
-            } else {
-                return Duration.ZERO;
-            }
-        }
-        return Duration.ZERO;
-    }
 
 }

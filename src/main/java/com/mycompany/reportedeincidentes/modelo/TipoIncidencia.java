@@ -1,4 +1,3 @@
-
 package com.mycompany.reportedeincidentes.modelo;
 
 import java.io.Serializable;
@@ -15,21 +14,27 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Getter @Setter
-@NoArgsConstructor @ToString 
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class TipoIncidencia implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTipoIncidenciaLong;
-    
+
     private String nombreIncidencia;
     private String complejidad;
     private LocalTime tiempoEstimadoResolucion;
     private LocalTime tiempoMaximoResolucion;
-    
-    @ManyToOne @JoinColumn(name = "incidencia") 
+
+    @ManyToOne
+    @JoinColumn(name = "incidencia")
     private Incidencia incidencia;
-    
-    @ManyToOne @JoinColumn(name = "servicio")
+
+    @ManyToOne
+    @JoinColumn(name = "servicio")
     private Servicio servicio;
 
     public TipoIncidencia(String nombreIncidencia, String complejidad, LocalTime tiempoEstimadoResolucion, LocalTime tiempoMaximoResolucion, Incidencia incidencia, Servicio servicio) {
@@ -41,8 +46,5 @@ public class TipoIncidencia implements Serializable {
         incidencia.getTiposIncidencias().add(this);
         this.servicio = servicio;
     }
-    
-    
-    
-    
+
 }

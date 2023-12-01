@@ -86,19 +86,18 @@ public class ServicioTecnicoImpl implements ServicioTecnico {
     //a. Quién fue el técnico con más incidentes resueltos en los últimos N días
     @Override
     public Tecnico obtenerTecnicoConMasIncidenciasResueltas(int ultimosDias) {
-
         Tecnico tecnicoConMasIncidentes = null;
         int maxIncidencias = 0;
 
         Map<Tecnico, Integer> incidenciasPorTecnico = new HashMap<>();
 
         for (Incidencia incidencia : servicioIncidenciaImpl.obtenerIncidenciasResueltasEnNDias(ultimosDias)) {
-            for (Especialidad especialidad : incidencia.getEspecialidades()) {
-                for (Tecnico tecnico : especialidad.getTecnicos()) {
-                    incidenciasPorTecnico.put(tecnico, incidenciasPorTecnico.getOrDefault(tecnico, 0) + 1);
-                }
-            }
+            Tecnico tecnico = incidencia.getTecnico();
+
+            incidenciasPorTecnico.put(tecnico, incidenciasPorTecnico.getOrDefault(tecnico, 0) + 1);
+
         }
+
         for (Map.Entry<Tecnico, Integer> entry : incidenciasPorTecnico.entrySet()) {
             if (entry.getValue() > maxIncidencias) {
                 tecnicoConMasIncidentes = entry.getKey();
@@ -109,43 +108,46 @@ public class ServicioTecnicoImpl implements ServicioTecnico {
 
     }
 
-    /*
-    Set<Tecnico> tecnicos = listarTecnicos();
-        try {
-            for (Tecnico tecnico : tecnicos) {
-                long incidentesResueltos = servicioIncidenciaImpl.calcularIncidenciasResueltas(tecnico, ultimosDias);
-
-                if (incidentesResueltos > maxIncidentes) {
-                    maxIncidentes = incidentesResueltos;
-                    tecnicoConMasIncidentes = tecnico;
-                }
-            }
-            return tecnicoConMasIncidentes;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-     */
     //b. Quién fue el técnico con más incidentes resueltos de una determinada especialidad en los últimos N días
-    public Tecnico obtenerTecnicoConMasIncidenciasResueltas(int ultimosDias, String especialidad) {
-        Tecnico tecnicoConMasIncidentes = null;
+    public Tecnico obtenerTecnicoConMasIncidenciasResueltas(int ultimosDias, String especialidad) throws Exception {
+        Tecnico tecnicoConMasIncidentesPorEspecialidad = null;
+        int maxIncidencias = 0;
 
-        long maxIncidentes = 0;
-        for (Tecnico tecnico : listarTecnicos()) {
-            for (Especialidad especialidadTecnico : tecnico.getEspecialidades()) {
-                long incidentesResueltosEnNDias = servicioIncidenciaImpl.calcularIncidenciasResueltas(tecnico, ultimosDias);
+        // Crear un mapa que asocie cada técnico con el número de incidencias que resolvió y que tienen la especialidad deseada
+        try {
+            Set<Incidencia> incidenciasResueltasPorEspecialidad = servicioIncidenciaImpl.obtenerIncidenciasResueltasPorEspecialidad(ultimosDias, especialidad);
+            Map<Tecnico, Integer> incidenciasPorTecnico = new HashMap<>();
+            for (Incidencia incidencia : incidenciasResueltasPorEspecialidad) {
+                Tecnico tecnico = incidencia.getTecnico();
+                incidenciasPorTecnico.put(tecnico, incidenciasPorTecnico.getOrDefault(tecnico, 0) + 1);
+            }
 
-                if (incidentesResueltosEnNDias > maxIncidentes && especialidadTecnico.getNombreEspecialidad().equals(especialidad)) {
-                    maxIncidentes = incidentesResueltosEnNDias;
-                    tecnicoConMasIncidentes = tecnico;
-
+            // Encontrar el técnico con el mayor número de incidencias resueltas
+            for (Map.Entry<Tecnico, Integer> entry : incidenciasPorTecnico.entrySet()) {
+                if (entry.getValue() > maxIncidencias) {
+                    tecnicoConMasIncidentesPorEspecialidad = entry.getKey();
+                    maxIncidencias = entry.getValue();
                 }
+            }
+            return tecnicoConMasIncidentesPorEspecialidad;
+        } catch (NullPointerException e) {
+            throw new Exception("No se encontró ningún técnico que cumpla con las condiciones.");
+        }
 
+    }
+
+    public Duration calcularTiempoPromedioResolucion() {
+        long tiempoTotalResolucion = 0;
+
+        for (Incidencia incidencia : servicioIncidenciaImpl.listarIncidencias() ) {
+            if (incidencia.getFechaApertura() != null && incidencia.getFechaResolucion() != null) {
+                tiempoTotalResolucion += Duration.between(incidencia.getFechaApertura(), incidencia.getFechaResolucion()).toMillis();
+                return Duration.ofMillis(tiempoTotalResolucion / servicioIncidenciaImpl.listarIncidencias().size());
+            } else {
+                return Duration.ZERO;
             }
         }
-        return tecnicoConMasIncidentes;
-
+        return Duration.ZERO;
     }
 
     //c. Quién fue el técnico que más rápido resolvió los incidentes
@@ -154,8 +156,7 @@ public class ServicioTecnicoImpl implements ServicioTecnico {
         Tecnico tecnicoMasRapido = null;
         Duration menorTiempoPromedio = Duration.ofDays(365);
         for (Tecnico tecnico : listarTecnicos()) {
-            Duration tiempoPromedio = tecnico.calcularTiempoPromedioResolucion();
-
+            Duration tiempoPromedio = calcularTiempoPromedioResolucion();
             if (tiempoPromedio.compareTo(menorTiempoPromedio) < 0) {
                 menorTiempoPromedio = tiempoPromedio;
                 tecnicoMasRapido = tecnico;
