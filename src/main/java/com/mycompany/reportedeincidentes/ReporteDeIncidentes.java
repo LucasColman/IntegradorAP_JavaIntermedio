@@ -27,7 +27,7 @@ public class ReporteDeIncidentes {
         ServicioServicioImpl servicioServicioImpl = new ServicioServicioImpl();
         ServicioIncidenciaImpl servicioIncidenciaImpl = new ServicioIncidenciaImpl();
         ServicioTipoIncidenciaImpl servicioTipoIncidenciaImpl = new ServicioTipoIncidenciaImpl();
-
+        
         //Admin
         //Se crean los servicios que ofrece la empresa
         Servicio servicio1 = new Servicio("Linux");
@@ -199,7 +199,8 @@ public class ReporteDeIncidentes {
         } else {
             System.out.println("El tecnico " + tecnico3.getApellido() + " no tiene la especialidad para resolver la incidencia");
         }
-
+        
+        //Se "resuelve" la incidencia
         servicioTecnicoImpl.resolverIncidencia(incidencia1);
         servicioIncidenciaImpl.editarIncidencia(incidencia1);
 
@@ -212,7 +213,7 @@ public class ReporteDeIncidentes {
             System.out.println("El tecnico " + tecnico2.getApellido() + " no tiene la especialidad para resolver la incidencia");
         }
 
-       
+       //Se "resuelve" la incidencia
         servicioTecnicoImpl.resolverIncidencia(incidencia2);
         servicioIncidenciaImpl.editarIncidencia(incidencia2);
 
@@ -224,7 +225,8 @@ public class ReporteDeIncidentes {
         } else {
             System.out.println("El tecnico " + tecnico2.getApellido() + " no tiene la especialidad para resolver la incidencia");
         }
-
+        
+        //Se "resuelve" la incidencia
         servicioTecnicoImpl.resolverIncidencia(incidencia3);
         servicioIncidenciaImpl.editarIncidencia(incidencia3);
 
@@ -237,7 +239,7 @@ public class ReporteDeIncidentes {
             System.out.println("El tecnico " + tecnico1.getApellido() + " no tiene la especialidad para resolver la incidencia");
         }
 
-        //Se resuelve la incidencia de manera setenado manualmente
+        //Se resuelve la incidencia seteando manualmente
         incidencia4.setFechaResolucion(LocalDateTime.now().minusDays(3));
         incidencia4.setEstado(Estado.CERRADO);
         servicioIncidenciaImpl.editarIncidencia(incidencia4);
@@ -254,7 +256,7 @@ public class ReporteDeIncidentes {
         System.out.println("El tecnico con mas incidencias resueltas en los ultimos dias ingresados es: " + tecnicoConMasIncidenciasResueltas.getApellido() + " " + tecnicoConMasIncidenciasResueltas.getNombre());
 
         //b. Quién fue el técnico con más incidentes resueltos de una determinada especialidad en los últimos N días
-        System.out.println("El tecnico con mas incidencias resueltas en los ultimos dias ingresados de la especialidad ingresada es: " + tecnicoConMasIncidenciasResueltasPorEspecialidad.getApellido() + " " + tecnicoConMasIncidenciasResueltasPorEspecialidad.getNombre());
+        System.out.println("El tecnico con mas incidencias resueltas en los ultimos dias ingresados, de la especialidad ingresada es: " + tecnicoConMasIncidenciasResueltasPorEspecialidad.getApellido() + " " + tecnicoConMasIncidenciasResueltasPorEspecialidad.getNombre());
         
         //c. Quién fue el técnico que más rápido resolvió los incidentes    ss
         System.out.println("El tecnico que mas rapido resolvio sus incidencias es: " + tecnicoMasRapido.getApellido() + " " + tecnicoMasRapido.getNombre());
