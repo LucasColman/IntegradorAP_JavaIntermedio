@@ -1,7 +1,6 @@
 package com.mycompany.reportedeincidentes.servicios;
 
 import com.mycompany.reportedeincidentes.modelo.Incidencia;
-import com.mycompany.reportedeincidentes.modelo.Tecnico;
 import java.util.Set;
 
 public interface ServicioIncidencia {
@@ -15,8 +14,6 @@ public interface ServicioIncidencia {
     public Incidencia buscarIncidencia(Long idIncidencia);
 
     public Set<Incidencia> listarIncidencias();
-
-    public long calcularIncidenciasResueltas(Tecnico tecnico, int dias);
 
     public Set<Incidencia> obtenerIncidenciasResueltasEnNDias(int dias);
     

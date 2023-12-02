@@ -1,9 +1,7 @@
 package com.mycompany.reportedeincidentes.servicios;
 
-import com.mycompany.reportedeincidentes.modelo.Especialidad;
 import com.mycompany.reportedeincidentes.modelo.Incidencia;
 import com.mycompany.reportedeincidentes.modelo.Tecnico;
-import java.time.Duration;
 import java.util.Set;
 
 public interface ServicioTecnico {

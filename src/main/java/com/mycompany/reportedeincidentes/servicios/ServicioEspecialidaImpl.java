@@ -1,6 +1,5 @@
 package com.mycompany.reportedeincidentes.servicios;
 
-import com.mycompany.reportedeincidentes.modelo.Cliente;
 import com.mycompany.reportedeincidentes.modelo.Especialidad;
 import com.mycompany.reportedeincidentes.modelo.Tecnico;
 import com.mycompany.reportedeincidentes.repositorio.EspecialidadJpaController;

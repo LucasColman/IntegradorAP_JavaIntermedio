@@ -14,9 +14,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-/*@Join column: Indica un atributo que actúa como llave foránea en otra entidad.
-    name: Identifica a la columna que guarda la clave foránea. Es el único campo obligatorio.
- */
 @Entity
 @Getter
 @Setter
@@ -33,7 +30,7 @@ public class Cliente implements Serializable {
     private String razonSocial;
     private String cuil;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "clientes")
     private Set<Servicio> servicios = new HashSet<>();
     
     @OneToMany(mappedBy = "cliente")

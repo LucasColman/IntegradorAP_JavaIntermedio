@@ -1,9 +1,6 @@
 package com.mycompany.reportedeincidentes.servicios;
 
-import com.mycompany.reportedeincidentes.Enums.Estado;
-
 import com.mycompany.reportedeincidentes.modelo.Incidencia;
-import com.mycompany.reportedeincidentes.modelo.Tecnico;
 import com.mycompany.reportedeincidentes.repositorio.IncidenciaJpaController;
 import com.mycompany.reportedeincidentes.repositorio.exceptions.NonexistentEntityException;
 import java.time.LocalDateTime;
@@ -59,21 +56,11 @@ public class ServicioIncidenciaImpl implements ServicioIncidencia {
     }
 
     @Override
-    public long calcularIncidenciasResueltas(Tecnico tecnico, int dias) {
-        LocalDateTime fechaLimite = LocalDateTime.now().minusDays(dias);
-        return listarIncidencias().stream()
-                .filter(incidencia -> incidencia.getEstado() == Estado.CERRADO)
-                .filter(incidencia -> incidencia.getTecnico().equals(tecnico))
-                .filter(incidencia -> incidencia.getFechaResolucion() != null)
-                .filter(incidencia -> incidencia.getFechaResolucion().isAfter(fechaLimite))
-                .count();
-    }
-
-    @Override
     public Set<Incidencia> obtenerIncidenciasResueltasEnNDias(int dias) {
-
+        
         Set<Incidencia> incidenciasRecientes = new HashSet<>();
         try {
+            //Si la fecha de resolucion de la incidencia es posterior a la fecha actual menos los n dias ingresados se agrega la incidencia a la coleccion
             for (Incidencia incidencia : listarIncidencias()) {
                 if (incidencia.getFechaResolucion().isAfter(LocalDateTime.now().minusDays(dias))) {
                     incidenciasRecientes.add(incidencia);
@@ -90,7 +77,7 @@ public class ServicioIncidenciaImpl implements ServicioIncidencia {
     public Set<Incidencia> obtenerIncidenciasResueltasPorEspecialidad(int dias, String especialidad) {
         Set<Incidencia> incidenciasRecientesPorEspecialidad = new HashSet<>();
 
-        // Crear una lista de incidencias resueltas en los últimos n días que tienen la especialidad deseada
+        // Crear una coleccion de incidencias resueltas en los últimos n días que tienen la especialidad deseada
         try {
             for (Incidencia incidencia : listarIncidencias()) {
                 if (incidencia.getFechaResolucion().isAfter(LocalDateTime.now().minusDays(dias)) && incidencia.getEspecialidades().stream().anyMatch(e -> e.getNombreEspecialidad().equals(especialidad))) {

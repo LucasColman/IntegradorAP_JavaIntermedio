@@ -17,10 +17,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-/**
- *
- * @author Lucas
- */
+
 public class TecnicoJpaController implements Serializable {
 
     public TecnicoJpaController(EntityManagerFactory emf) {

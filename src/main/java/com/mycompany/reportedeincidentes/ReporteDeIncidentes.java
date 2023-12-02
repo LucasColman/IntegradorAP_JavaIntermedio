@@ -17,6 +17,7 @@ import java.time.LocalTime;
 import com.mycompany.reportedeincidentes.servicios.ServicioIncidenciaImpl;
 
 //Sistema de reportes de incidentes
+//Lucas Colman
 public class ReporteDeIncidentes {
 
     public static void main(String[] args) throws Exception {
@@ -243,13 +244,13 @@ public class ReporteDeIncidentes {
 
         
         
-        //----------------------------Solucion a los requerimientos----------------------------------------------
+        //----------------------------Solucion a los requerimientos planteados en la entrega 2----------------------------------------------
    
         Tecnico tecnicoConMasIncidenciasResueltas = servicioTecnicoImpl.obtenerTecnicoConMasIncidenciasResueltas(4);
         Tecnico tecnicoConMasIncidenciasResueltasPorEspecialidad = servicioTecnicoImpl.obtenerTecnicoConMasIncidenciasResueltas(10, "Windows");
         Tecnico tecnicoMasRapido = servicioTecnicoImpl.obtenerTecnicoMasRapidoEnResolverIncidencias();
 
-        //a)
+        //a) Quién fue el técnico con más incidentes resueltos en los últimos N días
         System.out.println("El tecnico con mas incidencias resueltas en los ultimos dias ingresados es: " + tecnicoConMasIncidenciasResueltas.getApellido() + " " + tecnicoConMasIncidenciasResueltas.getNombre());
 
         //b. Quién fue el técnico con más incidentes resueltos de una determinada especialidad en los últimos N días

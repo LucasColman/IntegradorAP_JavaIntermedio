@@ -3,13 +3,11 @@ package com.mycompany.reportedeincidentes.modelo;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import lombok.Getter;
@@ -34,7 +32,7 @@ public class Especialidad implements Serializable {
     @JoinColumn(name = "incidencia")
     private Incidencia incidencia;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "especialidades")
     private Set<Tecnico> tecnicos = new HashSet<>();
 
     //Metodos

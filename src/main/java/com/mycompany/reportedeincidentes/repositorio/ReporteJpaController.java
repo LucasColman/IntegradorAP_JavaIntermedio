@@ -14,10 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-/**
- *
- * @author Lucas
- */
+
 public class ReporteJpaController implements Serializable {
 
     public ReporteJpaController(EntityManagerFactory emf) {

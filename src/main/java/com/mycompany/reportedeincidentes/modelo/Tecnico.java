@@ -1,14 +1,14 @@
 package com.mycompany.reportedeincidentes.modelo;
 
 import java.io.Serializable;
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import lombok.Getter;
@@ -31,6 +31,10 @@ public class Tecnico implements Serializable {
     private String apellido;
 
     @ManyToMany
+    @JoinTable(
+        name = "Tecnico_has_Especialidad",
+        joinColumns = @JoinColumn(name = "Especialidad_idEspecialidad"),
+        inverseJoinColumns = @JoinColumn(name = "Tecnico_idTecnico"))
     private Set<Especialidad> especialidades = new HashSet<>();
 
     @OneToMany(mappedBy = "tecnico")

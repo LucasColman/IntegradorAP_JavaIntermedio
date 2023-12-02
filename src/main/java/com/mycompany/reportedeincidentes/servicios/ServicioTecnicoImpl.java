@@ -61,11 +61,9 @@ public class ServicioTecnicoImpl implements ServicioTecnico {
         Set<Tecnico> listaTecnicos = new HashSet<>(lista);
         return listaTecnicos;
     }
-
-    //*********************************************************************************************************************
+    
     @Override
     public boolean puedeResolverIncidencia(Tecnico tecnico, Incidencia incidencia) {
-
         for (Especialidad especialidadTecnico : tecnico.getEspecialidades()) {
             for (Especialidad especialidadIncidencia : incidencia.getEspecialidades()) {
                 if (especialidadTecnico.getNombreEspecialidad().equals(especialidadIncidencia.getNombreEspecialidad())) {
@@ -80,24 +78,22 @@ public class ServicioTecnicoImpl implements ServicioTecnico {
     public void resolverIncidencia(Incidencia incidencia) {
         incidencia.setFechaResolucion(LocalDateTime.now());
         incidencia.setEstado(Estado.CERRADO);
-
     }
 
-    //a. Quién fue el técnico con más incidentes resueltos en los últimos N días
+    
     @Override
     public Tecnico obtenerTecnicoConMasIncidenciasResueltas(int ultimosDias) {
         Tecnico tecnicoConMasIncidentes = null;
         int maxIncidencias = 0;
 
         Map<Tecnico, Integer> incidenciasPorTecnico = new HashMap<>();
-
+        
+        //Se asocia el tecnico con la incidencia en el mapa
         for (Incidencia incidencia : servicioIncidenciaImpl.obtenerIncidenciasResueltasEnNDias(ultimosDias)) {
             Tecnico tecnico = incidencia.getTecnico();
-
             incidenciasPorTecnico.put(tecnico, incidenciasPorTecnico.getOrDefault(tecnico, 0) + 1);
-
         }
-
+         // Encontrar el técnico con el mayor número de incidencias resueltas
         for (Map.Entry<Tecnico, Integer> entry : incidenciasPorTecnico.entrySet()) {
             if (entry.getValue() > maxIncidencias) {
                 tecnicoConMasIncidentes = entry.getKey();
@@ -113,7 +109,7 @@ public class ServicioTecnicoImpl implements ServicioTecnico {
         Tecnico tecnicoConMasIncidentesPorEspecialidad = null;
         int maxIncidencias = 0;
 
-        // Crear un mapa que asocie cada técnico con el número de incidencias que resolvió y que tienen la especialidad deseada
+        // Se crea un mapa que asocie cada técnico con el número de incidencias que resolvió y que tienen la especialidad deseada
         try {
             Set<Incidencia> incidenciasResueltasPorEspecialidad = servicioIncidenciaImpl.obtenerIncidenciasResueltasPorEspecialidad(ultimosDias, especialidad);
             Map<Tecnico, Integer> incidenciasPorTecnico = new HashMap<>();

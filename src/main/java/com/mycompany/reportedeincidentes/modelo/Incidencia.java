@@ -13,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -42,7 +41,7 @@ public class Incidencia implements Serializable {
     @JoinColumn(name = "cliente")
     private Cliente cliente;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "incidencias")
     private Set<Servicio> servicios = new HashSet<>();
 
     @OneToMany(mappedBy = "incidencia")

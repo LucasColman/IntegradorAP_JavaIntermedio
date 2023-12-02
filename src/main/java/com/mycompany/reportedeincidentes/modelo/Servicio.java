@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import lombok.Getter;
@@ -28,9 +30,17 @@ public class Servicio implements Serializable {
     private String nombreServicio;
 
     @ManyToMany
+    @JoinTable(
+        name = "Cliente_has_Servicio",
+        joinColumns = @JoinColumn(name = "Servicio_idServicio"),
+        inverseJoinColumns = @JoinColumn(name = "Cliente_idCliente"))
     private Set<Cliente> clientes = new HashSet<>();
 
-    @ManyToMany
+     @ManyToMany
+     @JoinTable(
+        name = "Incidencia_has_Servicio",
+        joinColumns = @JoinColumn(name = "Servicio_idServicio"),
+        inverseJoinColumns = @JoinColumn(name = "Incidencia_idIncidencia"))
     private Set<Incidencia> incidencias = new HashSet<>();
 
     @OneToMany(mappedBy = "servicio")
